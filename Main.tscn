@@ -24,6 +24,8 @@ script = ExtResource("1_uu6xs")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 
+[node name="testeeee" type="Sprite2D" parent="Player"]
+
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
