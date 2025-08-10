@@ -1,0 +1,120 @@
+[gd_scene load_steps=9 format=3 uid="uid://7rqpo5ns3a1r"]
+
+[ext_resource type="Script" uid="uid://djlfm6aa2bcqw" path="res://Player.cs" id="1_uu6xs"]
+[ext_resource type="Script" uid="uid://d08vwgwcd67dj" path="res://HUD.cs" id="2_r0du0"]
+[ext_resource type="Texture2D" uid="uid://bxgg8n1e7d1hf" path="res://1000.png" id="3_r0du0"]
+[ext_resource type="Texture2D" uid="uid://d0enjwp2e3hdq" path="res://BG_AronaRoom_Night.png" id="4_cm0pq"]
+[ext_resource type="Texture2D" uid="uid://bwsr5lhykldav" path="res://pngegg.png" id="5_fos0i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fos0i"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3dxm6"]
+bg_color = Color(0.368627, 0.521569, 0.729412, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lgr22"]
+font_size = 22
+
+[node name="Main" type="Node"]
+
+[node name="Player" type="Node2D" parent="."]
+script = ExtResource("1_uu6xs")
+
+[node name="Sprite" type="Node2D" parent="Player"]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 2.0
+offset_right = 36.0
+offset_bottom = 40.0
+script = ExtResource("2_r0du0")
+player_path = NodePath("../Player")
+ControlesJuego_path = NodePath("ControlesJuego")
+PanelDialogo_path = NodePath("PanelDialogo")
+
+[node name="ControlesJuego" type="Panel" parent="UI"]
+layout_mode = 0
+offset_right = 1158.0
+offset_bottom = 644.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fos0i")
+
+[node name="LblInfo" type="Label" parent="UI/ControlesJuego"]
+layout_mode = 0
+offset_left = 433.0
+offset_top = 545.0
+offset_right = 808.0
+offset_bottom = 568.0
+horizontal_alignment = 1
+
+[node name="BtnHablar" type="Button" parent="UI/ControlesJuego"]
+layout_mode = 0
+offset_left = 99.0
+offset_top = 255.0
+offset_right = 330.0
+offset_bottom = 286.0
+text = "Hablar"
+
+[node name="BtnExplorar" type="Button" parent="UI/ControlesJuego"]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 306.0
+offset_right = 329.0
+offset_bottom = 337.0
+text = "Explorar"
+
+[node name="BtnJugar" type="Button" parent="UI/ControlesJuego"]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 200.0
+offset_right = 330.0
+offset_bottom = 231.0
+tooltip_text = "Jugar"
+text = "Jugar"
+
+[node name="BarradeHambre" type="ProgressBar" parent="UI/ControlesJuego"]
+layout_mode = 0
+offset_left = 431.0
+offset_top = 581.0
+offset_right = 816.0
+offset_bottom = 608.0
+
+[node name="Asado" type="Sprite2D" parent="UI/ControlesJuego"]
+position = Vector2(387, 579)
+scale = Vector2(0.108333, 0.103333)
+texture = ExtResource("5_fos0i")
+
+[node name="PanelDialogo" type="Panel" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = 259.0
+offset_top = 524.0
+offset_right = 946.0
+offset_bottom = 646.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3dxm6")
+
+[node name="LblCharla" type="Label" parent="UI/PanelDialogo"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 18.0
+offset_right = 668.0
+offset_bottom = 108.0
+label_settings = SubResource("LabelSettings_lgr22")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Shiroko" type="Sprite2D" parent="UI"]
+position = Vector2(576, 298)
+scale = Vector2(0.26025, 0.21909)
+texture = ExtResource("3_r0du0")
+
+[node name="Fondo" type="Sprite2D" parent="UI"]
+process_mode = 4
+show_behind_parent = true
+z_as_relative = false
+position = Vector2(576.5, 320.5)
+scale = Vector2(0.899219, 0.721111)
+texture = ExtResource("4_cm0pq")
+metadata/_edit_lock_ = true
+
+[node name="HambreTemporizador" type="Timer" parent="."]
