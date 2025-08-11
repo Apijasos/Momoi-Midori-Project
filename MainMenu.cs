@@ -44,6 +44,8 @@ public partial class MainMenu : Control
 	Recorda que para asignar esos metodos a .Pressed de los botones vas a primero tener que hacer los métodos y
 	después volver a asignarlos en el _Ready()
 	
+	PD2: Recorda que vas a tener que acomodar los controladores, estos van a estar en el menú 2D (de arriba).
+	
 	Cualquier cosa me hablas al Discord. Éxitos :)
 	*/
 }
