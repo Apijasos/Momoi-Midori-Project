@@ -90,7 +90,6 @@ texture = ExtResource("5_fos0i")
 
 [node name="PanelDialogo" type="Panel" parent="UI"]
 visible = false
-layout_mode = 0
 offset_left = 259.0
 offset_top = 524.0
 offset_right = 946.0

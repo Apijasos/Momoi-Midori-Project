@@ -118,5 +118,23 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 		}
 	}
 	
+	//Trabajo para NACHO
+	
+	/*
+	Agregar el nivel de relación con la mina.
+	 ¿Cómo hacerlo? En el Nodo UI apretas click derecho, agregas un nodo hijo, en el buscador pones "ProgressBar"
+	y lo agregas. Le vas a poner de nombre "BarradeRelacion", luego lo arrastras hasta el nodo "ControlesJuego", así ahora es hijo de este panel.
+	En Player.cs vas a tener que declarar dos variables, RelacionMax y Relacion (la lógica es similar al hambre).
+	En HUD.cs vas a declarar a la BarradeRelacion como una variable tipo "ProgressBar" antes del constructor.
+	En el constructor "_Ready()" vas a asignarle su ubicación en el nodo, que será algo como "(ControlesJuego/BarradeRelacion)"
+	
+	¿Cómo funciona la lógica del nivel de relación?
+	Por ahora va a funcionar de la siguiente manera: Aumenta su nivel de relación cada vez que se habla con ella (se aprieta el botón de Hablar).
+	Por lo tanto a la función de Hablar() (de Player.cs) va a ser modificada con está lógica (se la agregas al final).
+	ActualizarUI() también se va a modificar, ya que la relación es una nueva variable global.
+	
+	Recorda consultarme al Discord si necesitas ayuda. Éxitos :)
+	*/
+	
 	//Cualquier duda me preguntan.
 }
