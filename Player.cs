@@ -12,6 +12,8 @@ public partial class Player : Node2D //=> Clase pública declarada, partimos de 
 	[Export] public int Hambre {get; set;} = 80;
 	[Export] public int RelacionMax {get; set;} = 100;
 	[Export] public int Relacion {get; set;} = 50;
+	[Export] public int CorduraMax {get; set;} = 100;
+	[Export] public int Cordura {get; set;} = 100;
 	
 	//Variable para generar un numero aleatorio y usarlo en todo el programa
 	private RandomNumberGenerator rng;
@@ -38,6 +40,7 @@ public partial class Player : Node2D //=> Clase pública declarada, partimos de 
 		{
 			int ComidaEncontrada = (int)rng.RandiRange(8, 25); //=> Un número entre el 8 y el 25 que dirá cuanta comida encontraste
 			Hambre = Math.Min(HambreMax, Hambre + ComidaEncontrada); /*=> A nuestra hambre le agregamos la comida
+			
 																	Y con Math.Min redondeamos al entero más chico*/
 			return(true, ComidaEncontrada); //=> Devolvemos el resultado (true = si se encontró comida, ComidaEncontrada = valor hallado)
 		}
@@ -46,6 +49,8 @@ public partial class Player : Node2D //=> Clase pública declarada, partimos de 
 		{
 			int Costo = (int)rng.RandiRange(2, 6); //=> Chavito, el viaje a Acapulco no fue gratis... (cuanta hambre nos costo)
 			Hambre = Math.Max(0, Hambre - Costo); //=> A nuestra hambre actual le restamos lo que nos costó. Math.Max devuelve el entero redondeado más alto.
+			int Locura = (int)rng.RandiRange(5, 10);
+			Cordura = Math.Max(0, Cordura - Locura);
 			return(false, 0);// => Devolvemos el resultado (false = no se encontró comida, 0 = valor hallado)
 		}
 		/*PD: Si el hambre sube es "bueno", ya que estariamos comiendo.

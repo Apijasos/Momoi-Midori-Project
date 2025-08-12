@@ -40,10 +40,10 @@ PanelDialogo_path = NodePath("PanelDialogo")
 
 [node name="ControlesJuego" type="Panel" parent="UI"]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 1160.0
-offset_bottom = 646.0
+offset_left = -2.0
+offset_top = -1.0
+offset_right = 1156.0
+offset_bottom = 643.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_fos0i")
 
 [node name="LblInfo" type="Label" parent="UI/ControlesJuego"]
@@ -102,6 +102,18 @@ offset_bottom = 632.0
 position = Vector2(-39, 11)
 scale = Vector2(0.152816, 0.137019)
 texture = ExtResource("4_3dxm6")
+
+[node name="BarradeCordura" type="ProgressBar" parent="UI/ControlesJuego"]
+layout_mode = 0
+offset_left = 1070.0
+offset_top = 362.0
+offset_right = 1106.0
+offset_bottom = 641.0
+fill_mode = 3
+
+[node name="SprBrain" type="Sprite2D" parent="UI/ControlesJuego/BarradeCordura"]
+position = Vector2(24, -40)
+scale = Vector2(0.0404, 0.0321999)
 
 [node name="PanelDialogo" type="Panel" parent="UI"]
 visible = false
