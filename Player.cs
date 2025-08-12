@@ -10,6 +10,9 @@ public partial class Player : Node2D //=> Clase pública declarada, partimos de 
 	//Hambre y su valor máximo en una variable aparte. Se pueden cambiar en el inspector de Player al tener '[Export]'
 	[Export] public int HambreMax  {get; set;} = 100; 
 	[Export] public int Hambre {get; set;} = 80;
+	[Export] public int RelacionMax {get; set;} = 100;
+	[Export] public int Relacion {get; set;} = 50;
+	
 	//Variable para generar un numero aleatorio y usarlo en todo el programa
 	private RandomNumberGenerator rng;
 	//Variable que guarda el indice [i] del vector de los dialogos. Evita dos (o más) repeticiones de dialogo.
@@ -86,7 +89,15 @@ public partial class Player : Node2D //=> Clase pública declarada, partimos de 
 		}
 		while(i == IndiceDialogoAnterior && Dialogos.Length > 0);//Hacer el Do mientras el indice sea igual al indice anterior, guardado globalmente con anterioridad
 		
+		int interaccion = (int)rng.RandiRange(5, 10);
+		Relacion = Math.Max(0, Relacion + interaccion);
+		
 		IndiceDialogoAnterior = i; //Cuándo se rompe el bucle se guarda el indice nuevo en está variable, para que la próxima vez no se repita este dialogo
 		return Dialogos[i]; //Devolvemos el string. Especificamos el indice para no devolver un vector.
-	}
+		
+		}
 }
+	
+
+		
+	

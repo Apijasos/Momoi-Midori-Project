@@ -11,10 +11,11 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 	//Declaramos los controladores gráficos y nodos principales (menos UI) como variables de manera privada.
 	private Player Jugador; //=> Player, el nodo principal 
 	private Panel ControlesJuego, PanelDialogo; //=> Los dos paneles (sirven como contenedores)
-	private ProgressBar BarradeHambre;//=> La barra de progreso
+	private ProgressBar BarradeHambre, BarradeRelacion;//=> La barra de progreso
 	private Label LblInfo, LblCharla;//=> Los dos labels. Podemos ponerlos así para evitar muchas lineas de código
 	private Button BtnHablar, BtnExplorar, BtnJugar; //=> Los tres botones. Misma lógica que la de los labels
 	private Timer HambreTemporizador;//=> El temporizador
+	
 	
 	//Inicializamos los controladores especificando su ubicación en el nodo
 	public override void _Ready()
@@ -35,6 +36,7 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 		BtnExplorar = GetNode<Button>("ControlesJuego/BtnExplorar");
 		BtnJugar = GetNode<Button>("ControlesJuego/BtnJugar");
 		LblCharla = GetNode<Label>("PanelDialogo/LblCharla");
+		BarradeRelacion = GetNode<ProgressBar>("ControlesJuego/BarradeRelacion");
 		
 		/*Inicializamos la lógica de '¿Qué pasa?' cuando se llama a una función integrada de un controlador gráfico
 		En este caso .Pressed del controlador gráfico de los buttons. Hay que hacerlo para cada uno de los que están
@@ -66,6 +68,7 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 		//PD = 'Jugador' incluye toda la clase del Nodo 'Player'. Podes acceder a sus métodos y funciones, las de Player.cs por qué lo declaraste al inicio, en el _Ready()
 		LblCharla.Text = texto; //=> Cambiamos el texto del label del PanelDialogo al dialogo que se generó.
 		//PD = Para cambiar el texto de un label se tiene que hacer referencia al .Text del label y no al label en si, no hagan 'LblCharla = Text', ya que es un error
+		ActualizarUI();
 	}
 	
 	//Función que se llama cuando se aprieta el botón de explorar
@@ -105,8 +108,9 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 	{
 		BarradeHambre.Value = Jugador.Hambre; //Al value de la barra del hambre le asignamos nuestro apetito 
 		//BarradeCordura.Value = Jugador.Cordura; etc...
+		BarradeRelacion.Value = Jugador.Relacion;
 	}
-
+	
 	//Método que se llama cuando el jugador aprieta click con el mouse en el panel de dialogo (el LblCharla del PanelDialogo)
 	private void ClickMousePaneldeDialogo(InputEvent @event) //InputEvent permite almacenar variables de eventos relacionados al gui (perifericos)
 	{
