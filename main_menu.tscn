@@ -62,3 +62,75 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 35
 text = "SALIR"
 metadata/_edit_lock_ = true
+
+[node name="PnlOpciones" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 637.0
+offset_top = 375.0
+offset_right = 1052.0
+offset_bottom = 639.0
+
+[node name="BtnOpcion1" type="Button" parent="PnlOpciones"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 78.0
+offset_right = 412.0
+offset_bottom = 147.0
+theme_override_font_sizes/font_size = 30
+text = "Opcion 1 "
+metadata/_edit_lock_ = true
+
+[node name="BtnOpcion2" type="Button" parent="PnlOpciones"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 149.0
+offset_right = 416.0
+offset_bottom = 213.0
+theme_override_font_sizes/font_size = 30
+text = "Opcion 2"
+metadata/_edit_lock_ = true
+
+[node name="LblOpciones" type="Label" parent="PnlOpciones"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 12.0
+offset_right = 414.0
+offset_bottom = 73.0
+theme_override_font_sizes/font_size = 35
+text = "             Opciones"
+metadata/_edit_lock_ = true
+
+[node name="PnlCargarPartida" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 637.0
+offset_top = 380.0
+offset_right = 1044.0
+offset_bottom = 647.0
+
+[node name="BtnCargarPartida1" type="Button" parent="PnlCargarPartida"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 211.0
+offset_right = 405.0
+offset_bottom = 264.0
+text = "Cargar Partida 2"
+metadata/_edit_lock_ = true
+
+[node name="BtnCargarPartida2" type="Button" parent="PnlCargarPartida"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 157.0
+offset_right = 404.0
+offset_bottom = 211.0
+text = "Cargar Partida 1"
+metadata/_edit_lock_ = true
+
+[node name="LblCargarPartida" type="Label" parent="PnlCargarPartida"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 405.0
+offset_bottom = 158.0
+theme_override_font_sizes/font_size = 35
+text = "Seleccione una partida"
+metadata/_edit_lock_ = true
