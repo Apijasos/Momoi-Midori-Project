@@ -14,9 +14,13 @@ public partial class Player : Node2D //=> Clase pública declarada, partimos de 
 	[Export] public int Relacion {get; set;} = 50;
 	[Export] public int CorduraMax {get; set;} = 100;
 	[Export] public int Cordura {get; set;} = 21;
+	[Export] public int ChoiceMax {get; set;} = 4;
+	[Export] public int Choice {get; set;} = 4;
+	[Export] public int Day {get; set;} = 1;
 		
 	//Variable para generar un numero aleatorio y usarlo en todo el programa
 	private RandomNumberGenerator rng;
+	
 	//Variable que guarda el indice [i] del vector de los dialogos. Evita dos (o más) repeticiones de dialogo.
 	private int IndiceDialogoAnterior = -1;
 	
@@ -34,7 +38,7 @@ public partial class Player : Node2D //=> Clase pública declarada, partimos de 
 		//Una lógica de "tirada de dados", donde se trabajan las posibilidades del éxito de la exploración
 		int Roll = (int)rng.RandiRange(0, 100); // => Generamos un entero que devuelva un valor entre 0 y 100
 		int ChanceBase = 60; // => Chances de que no se pueda encontrar comida. Disminuirlo aumenta la dificultad.
-		
+		ContadorDecisiones(); //=> Se llama la funcion para restar una decision al jugador
 		//Si el entero generado es menor que las chances iniciales la exploración fue un éxito.
 		if (Roll < ChanceBase)
 		{
@@ -62,6 +66,7 @@ public partial class Player : Node2D //=> Clase pública declarada, partimos de 
 	{
 		int Costo = (int)rng.RandiRange(3, 6);//=> Calculamos cuanto nos costó jugar
 		Hambre = Math.Max(0, Hambre - Costo); //=> Lo que nos costó lo restamos del hambre
+		ContadorDecisiones(); //=> Se llama la funcion para restar una decision al jugador
 		return $"Jugaron y se divirtieron jijo. Jugar costó {Costo} de hambre";//=> Devolvemos el string con los datos
 	}
 	
@@ -98,8 +103,18 @@ public partial class Player : Node2D //=> Clase pública declarada, partimos de 
 		Relacion = Math.Max(0, Relacion + interaccion);
 		
 		IndiceDialogoAnterior = i; //Cuándo se rompe el bucle se guarda el indice nuevo en está variable, para que la próxima vez no se repita este dialogo
+		ContadorDecisiones(); //=> Se llama la funcion para restar una decision al jugador
 		return Dialogos[i]; //Devolvemos el string. Especificamos el indice para no devolver un vector.
 		
+		}
+		
+		// Funcion que le brinda al jugador la cantidad de decisiones que puede ejecutar por dia
+		public void ContadorDecisiones() {
+			Choice--;
+			if(Choice==0){
+				Choice=4;
+				Day++;
+			}
 		}
 }
 	

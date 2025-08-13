@@ -132,6 +132,13 @@ scale = Vector2(0.152816, 0.137019)
 texture = ExtResource("4_3dxm6")
 metadata/_edit_lock_ = true
 
+[node name="LblFecha" type="Label" parent="UI/ControlesJuego"]
+layout_mode = 0
+offset_left = 1437.0
+offset_top = 19.0
+offset_right = 1904.0
+offset_bottom = 167.0
+
 [node name="PanelDialogo" type="Panel" parent="UI"]
 visible = false
 layout_mode = 0

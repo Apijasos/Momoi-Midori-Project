@@ -15,11 +15,10 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 	private Panel ControlesJuego, PanelDialogo; //=> Los dos paneles (sirven como contenedores)
 	private VBoxContainer BotonesPrincipales, BarrasPrimarias;
 	private ProgressBar BarradeHambre, BarradeRelacion, BarradeCordura;//=> La barra de progreso
-	private Label LblInfo, LblCharla;//=> Los dos labels. Podemos ponerlos así para evitar muchas lineas de código
+	private Label LblInfo, LblCharla, LblFecha; //=> Los dos labels. Podemos ponerlos así para evitar muchas lineas de código
 	private Button BtnHablar, BtnExplorar, BtnJugar; //=> Los tres botones. Misma lógica que la de los labels
 	private Timer HambreTemporizador;//=> El temporizador
 	private Sprite2D SprBrain; 
-
 	
 	//Inicializamos los controladores especificando su ubicación en el nodo
 	public override void _Ready()
@@ -45,7 +44,7 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 		BarradeRelacion = GetNode<ProgressBar>("ControlesJuego/BarrasPrimarias/BarradeRelacion");
 		BarradeCordura = GetNode<ProgressBar>("ControlesJuego/BarradeCordura");
 		SprBrain = GetNode<Sprite2D>("ControlesJuego/BarradeCordura/SprBrain");
-		
+		LblFecha = GetNode<Label>("ControlesJuego/LblFecha");
 		
 		/*Inicializamos la lógica de '¿Qué pasa?' cuando se llama a una función integrada de un controlador gráfico
 		En este caso .Pressed del controlador gráfico de los buttons. Hay que hacerlo para cada uno de los que están
@@ -66,6 +65,9 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 		PanelDialogo.Visible = false; //=> Inicializamos al PanelDialogo con visibilidad false, ya que solo se mostrará si se habla
 		
 		SprBrain.Texture = GD.Load<Texture2D>("res://brain.png");
+		
+		/* Funcion para que se visualice los dias y decisiones al iniciar el juego */
+		LblFecha.Text = $"Tenes {Jugador.Choice} decisiones restantes. Han pasado {Jugador.Day} de dias.";
 	
 	ActualizarUI(); //=> Función que actualiza los datos del hambre según lo que suceda
 	}
@@ -126,6 +128,7 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 		//BarradeCordura.Value = Jugador.Cordura; etc...
 		BarradeRelacion.Value = Jugador.Relacion;
 		BarradeCordura.Value = Jugador.Cordura;
+		LblFecha.Text = $"Tenes {Jugador.Choice} decisiones restantes. Han pasado {Jugador.Day} de dias.";
 	}
 	
 	//Método que se llama cuando el jugador aprieta click con el mouse en el panel de dialogo (el LblCharla del PanelDialogo)
@@ -136,6 +139,15 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 			PanelDialogo.Visible = false; //El PanelDialogo cambia su visibilidad a false, cerrandose
 			ControlesJuego.Visible = true; //Los controladores del juego (botones y demás) vuelven a aparecer
 			
+		}
+	}
+	
+	// Funcion para salir al menu
+	public override void _Input(InputEvent @event){
+		if(@event is InputEventKey keyEvent){
+			if(keyEvent.Pressed && keyEvent.Keycode == Key.Escape){
+				GetTree().ChangeSceneToFile("res://main_menu.tscn");
+			}
 		}
 	}
 	
