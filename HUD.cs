@@ -103,6 +103,10 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 		{
 			SprBrain.Texture = GD.Load<Texture2D>("res://cerebroroto.png"); //=> La imagen es muy pequeña, hay que ajustar sus dimensiones
 		}
+		else
+		{
+			SprBrain.Texture = GD.Load<Texture2D>("res://brain.png");
+		}
 		ActualizarUI(); //=> Actualiza el hambre. La cantidad si es reducida del hambre
 	}
 	
@@ -110,6 +114,14 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 	private void PresionarJugar()
 	{
 		LblInfo.Text = Jugador.Jugar(); //=> .Jugar() devuelve un string, entonces se lo podemos asignar a un .Text
+		if (Jugador.Cordura <= 20)
+		{
+			SprBrain.Texture = GD.Load<Texture2D>("res://cerebroroto.png"); //=> La imagen es muy pequeña, hay que ajustar sus dimensiones
+		}
+		else
+		{
+			SprBrain.Texture = GD.Load<Texture2D>("res://brain.png");
+		}
 		ActualizarUI(); //=> Actualizamos con el hambre generada por jugar
 	}
 	

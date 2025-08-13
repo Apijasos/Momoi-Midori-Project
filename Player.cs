@@ -67,6 +67,8 @@ public partial class Player : Node2D //=> Clase pública declarada, partimos de 
 		int Costo = (int)rng.RandiRange(3, 6);//=> Calculamos cuanto nos costó jugar
 		Hambre = Math.Max(0, Hambre - Costo); //=> Lo que nos costó lo restamos del hambre
 		ContadorDecisiones(); //=> Se llama la funcion para restar una decision al jugador
+		int CorduraGanada = (int)rng.RandiRange(5, 20);
+		Cordura = Math.Max(0, CorduraGanada + Cordura);
 		return $"Jugaron y se divirtieron jijo. Jugar costó {Costo} de hambre";//=> Devolvemos el string con los datos
 	}
 	
@@ -117,7 +119,3 @@ public partial class Player : Node2D //=> Clase pública declarada, partimos de 
 			}
 		}
 }
-	
-
-		
-	

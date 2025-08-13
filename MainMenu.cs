@@ -39,7 +39,14 @@ public partial class MainMenu : Control
 		GetTree().Quit();
 	}
 	
-	
+	// Funcion para salir al menu con escape
+	public override void _Input(InputEvent @event){
+		if(@event is InputEventKey keyEvent){
+			if(keyEvent.Pressed && keyEvent.Keycode == Key.Escape){
+				GetTree().Quit();
+			}
+		}
+	}
 	
 	/*
 	Agregar un menú principal.
