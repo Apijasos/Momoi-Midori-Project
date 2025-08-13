@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://7rqpo5ns3a1r"]
+[gd_scene load_steps=9 format=3 uid="uid://7rqpo5ns3a1r"]
 
 [ext_resource type="Script" uid="uid://djlfm6aa2bcqw" path="res://Player.cs" id="1_uu6xs"]
 [ext_resource type="Script" uid="uid://d08vwgwcd67dj" path="res://HUD.cs" id="2_r0du0"]
@@ -12,9 +12,6 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3dxm6"]
 bg_color = Color(0.368627, 0.521569, 0.729412, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_lgr22"]
-font_size = 22
 
 [node name="Main" type="Node"]
 
@@ -37,115 +34,130 @@ script = ExtResource("2_r0du0")
 player_path = NodePath("../Player")
 ControlesJuego_path = NodePath("ControlesJuego")
 PanelDialogo_path = NodePath("PanelDialogo")
+BotonesPrincipales_path = NodePath("ControlesJuego/BotonesPrincipales")
+BarrasPrimarias_path = NodePath("ControlesJuego/BarrasPrimarias")
+
+[node name="Fondo" type="TextureRect" parent="UI"]
+z_index = -2
+layout_mode = 0
+offset_right = 1921.0
+offset_bottom = 1078.0
+texture = ExtResource("4_cm0pq")
+
+[node name="Shiroko" type="Sprite2D" parent="UI"]
+position = Vector2(1028, 434)
+scale = Vector2(0.365125, 0.313666)
+texture = ExtResource("3_r0du0")
 
 [node name="ControlesJuego" type="Panel" parent="UI"]
 layout_mode = 0
-offset_left = -2.0
-offset_top = -1.0
-offset_right = 1156.0
-offset_bottom = 643.0
+offset_left = 1.0
+offset_top = -7.0
+offset_right = 1918.0
+offset_bottom = 1078.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_fos0i")
-
-[node name="LblInfo" type="Label" parent="UI/ControlesJuego"]
-layout_mode = 0
-offset_left = 433.0
-offset_top = 545.0
-offset_right = 808.0
-offset_bottom = 568.0
-horizontal_alignment = 1
-
-[node name="BtnHablar" type="Button" parent="UI/ControlesJuego"]
-layout_mode = 0
-offset_left = 99.0
-offset_top = 255.0
-offset_right = 330.0
-offset_bottom = 286.0
-text = "Hablar"
-
-[node name="BtnExplorar" type="Button" parent="UI/ControlesJuego"]
-layout_mode = 0
-offset_left = 102.0
-offset_top = 306.0
-offset_right = 329.0
-offset_bottom = 337.0
-text = "Explorar"
-
-[node name="BtnJugar" type="Button" parent="UI/ControlesJuego"]
-layout_mode = 0
-offset_left = 97.0
-offset_top = 200.0
-offset_right = 330.0
-offset_bottom = 231.0
-tooltip_text = "Jugar"
-text = "Jugar"
-
-[node name="BarradeHambre" type="ProgressBar" parent="UI/ControlesJuego"]
-layout_mode = 0
-offset_left = 426.0
-offset_top = 565.0
-offset_right = 812.0
-offset_bottom = 592.0
-
-[node name="Asado" type="Sprite2D" parent="UI/ControlesJuego"]
-position = Vector2(385, 561)
-scale = Vector2(0.108333, 0.103333)
-texture = ExtResource("5_fos0i")
-
-[node name="BarradeRelacion" type="ProgressBar" parent="UI/ControlesJuego"]
-layout_mode = 0
-offset_left = 429.0
-offset_top = 605.0
-offset_right = 814.0
-offset_bottom = 632.0
-
-[node name="CorazonDibujoPng" type="Sprite2D" parent="UI/ControlesJuego/BarradeRelacion"]
-position = Vector2(-39, 11)
-scale = Vector2(0.152816, 0.137019)
-texture = ExtResource("4_3dxm6")
+metadata/_edit_lock_ = true
 
 [node name="BarradeCordura" type="ProgressBar" parent="UI/ControlesJuego"]
 layout_mode = 0
-offset_left = 1070.0
-offset_top = 362.0
-offset_right = 1106.0
-offset_bottom = 641.0
+offset_left = 1584.0
+offset_top = 232.0
+offset_right = 1652.0
+offset_bottom = 731.0
 fill_mode = 3
 
 [node name="SprBrain" type="Sprite2D" parent="UI/ControlesJuego/BarradeCordura"]
 position = Vector2(24, -40)
 scale = Vector2(0.0404, 0.0321999)
 
+[node name="BotonesPrincipales" type="VBoxContainer" parent="UI/ControlesJuego"]
+layout_mode = 0
+offset_left = 146.0
+offset_top = 236.0
+offset_right = 628.0
+offset_bottom = 488.0
+
+[node name="BtnHablar" type="Button" parent="UI/ControlesJuego/BotonesPrincipales"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Hablar"
+metadata/_edit_lock_ = true
+
+[node name="BtnExplorar" type="Button" parent="UI/ControlesJuego/BotonesPrincipales"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Explorar"
+metadata/_edit_lock_ = true
+
+[node name="BtnJugar" type="Button" parent="UI/ControlesJuego/BotonesPrincipales"]
+layout_mode = 2
+size_flags_vertical = 3
+tooltip_text = "Jugar"
+text = "Jugar"
+metadata/_edit_lock_ = true
+
+[node name="BarrasPrimarias" type="VBoxContainer" parent="UI/ControlesJuego"]
+layout_mode = 0
+offset_left = 616.0
+offset_top = 768.0
+offset_right = 1479.0
+offset_bottom = 984.0
+
+[node name="LblInfo" type="Label" parent="UI/ControlesJuego/BarrasPrimarias"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 38
+horizontal_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="BarradeHambre" type="ProgressBar" parent="UI/ControlesJuego/BarrasPrimarias"]
+layout_mode = 2
+size_flags_vertical = 3
+metadata/_edit_lock_ = true
+
+[node name="Asado" type="Sprite2D" parent="UI/ControlesJuego/BarrasPrimarias/BarradeHambre"]
+position = Vector2(-41, -4)
+scale = Vector2(0.108333, 0.103333)
+texture = ExtResource("5_fos0i")
+metadata/_edit_lock_ = true
+
+[node name="BarradeRelacion" type="ProgressBar" parent="UI/ControlesJuego/BarrasPrimarias"]
+layout_mode = 2
+size_flags_vertical = 3
+metadata/_edit_lock_ = true
+
+[node name="CorazonDibujoPng" type="Sprite2D" parent="UI/ControlesJuego/BarrasPrimarias/BarradeRelacion"]
+position = Vector2(-39, 11)
+scale = Vector2(0.152816, 0.137019)
+texture = ExtResource("4_3dxm6")
+metadata/_edit_lock_ = true
+
 [node name="PanelDialogo" type="Panel" parent="UI"]
 visible = false
 layout_mode = 0
-offset_left = 259.0
-offset_top = 524.0
-offset_right = 946.0
-offset_bottom = 646.0
+offset_left = 345.0
+offset_top = 809.0
+offset_right = 1650.0
+offset_bottom = 1034.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_3dxm6")
 
 [node name="LblCharla" type="Label" parent="UI/PanelDialogo"]
-layout_mode = 0
-offset_left = 23.0
-offset_top = 18.0
-offset_right = 668.0
-offset_bottom = 108.0
-label_settings = SubResource("LabelSettings_lgr22")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -322.5
+offset_top = -45.0
+offset_right = 322.5
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Shiroko" type="Sprite2D" parent="UI"]
-position = Vector2(576, 298)
-scale = Vector2(0.26025, 0.21909)
-texture = ExtResource("3_r0du0")
-
-[node name="Fondo" type="Sprite2D" parent="UI"]
-process_mode = 4
-show_behind_parent = true
-z_as_relative = false
-position = Vector2(576.5, 320.5)
-scale = Vector2(0.899219, 0.721111)
-texture = ExtResource("4_cm0pq")
+text_direction = 1
 metadata/_edit_lock_ = true
 
 [node name="HambreTemporizador" type="Timer" parent="."]

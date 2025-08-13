@@ -7,10 +7,13 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 	[Export] public NodePath player_path; //=> Hacemos una "conexión" con la clase Player, a través del inspector
 	[Export] private NodePath ControlesJuego_path;//=> Hacemos lo mismo pero con el Panel de ControlesJuego
 	[Export] private NodePath PanelDialogo_path;//=> Hacemos lo mismo pero con el Panel de PanelDialogo
+	[Export] private NodePath BotonesPrincipales_path;
+	[Export] private NodePath BarrasPrimarias_path;
 	
 	//Declaramos los controladores gráficos y nodos principales (menos UI) como variables de manera privada.
 	private Player Jugador; //=> Player, el nodo principal 
 	private Panel ControlesJuego, PanelDialogo; //=> Los dos paneles (sirven como contenedores)
+	private VBoxContainer BotonesPrincipales, BarrasPrimarias;
 	private ProgressBar BarradeHambre, BarradeRelacion, BarradeCordura;//=> La barra de progreso
 	private Label LblInfo, LblCharla;//=> Los dos labels. Podemos ponerlos así para evitar muchas lineas de código
 	private Button BtnHablar, BtnExplorar, BtnJugar; //=> Los tres botones. Misma lógica que la de los labels
@@ -25,19 +28,21 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 		Jugador = GetNode<Player>(player_path);//=> En el inspector ya declaramos su ubicación.
 		ControlesJuego = GetNode<Panel>(ControlesJuego_path);//=> Lo mismo acá
 		PanelDialogo = GetNode<Panel>(PanelDialogo_path);//=> Lo mismo acá
+		BotonesPrincipales = GetNode<VBoxContainer>(BotonesPrincipales_path);
+		BarrasPrimarias = GetNode<VBoxContainer>(BarrasPrimarias_path);
 		
 		/*Las siguientes ubicaciones se dan según su posición en el nodo UI (este no se especifica)
 		Si estuvieran sueltas en el nodo UI, sin estar en ninguna ubicación seria (LblEjemplo)
 		Pero como están en un contenedor primero se pone este y luego el controlador => (Container/Label)
 		Si hubiera más de un container => (Container2/Container1/Label), y así...
 		*/
-		BarradeHambre = GetNode<ProgressBar>("ControlesJuego/BarradeHambre"); 
-		LblInfo = GetNode<Label>("ControlesJuego/LblInfo");
-		BtnHablar = GetNode<Button>("ControlesJuego/BtnHablar");
-		BtnExplorar = GetNode<Button>("ControlesJuego/BtnExplorar");
-		BtnJugar = GetNode<Button>("ControlesJuego/BtnJugar");
+		BarradeHambre = GetNode<ProgressBar>("ControlesJuego/BarrasPrimarias/BarradeHambre"); 
+		LblInfo = GetNode<Label>("ControlesJuego/BarrasPrimarias/LblInfo");
+		BtnHablar = GetNode<Button>("ControlesJuego/BotonesPrincipales/BtnHablar");
+		BtnExplorar = GetNode<Button>("ControlesJuego/BotonesPrincipales/BtnExplorar");
+		BtnJugar = GetNode<Button>("ControlesJuego/BotonesPrincipales/BtnJugar");
 		LblCharla = GetNode<Label>("PanelDialogo/LblCharla");
-		BarradeRelacion = GetNode<ProgressBar>("ControlesJuego/BarradeRelacion");
+		BarradeRelacion = GetNode<ProgressBar>("ControlesJuego/BarrasPrimarias/BarradeRelacion");
 		BarradeCordura = GetNode<ProgressBar>("ControlesJuego/BarradeCordura");
 		SprBrain = GetNode<Sprite2D>("ControlesJuego/BarradeCordura/SprBrain");
 		
@@ -92,7 +97,10 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 		{
 			LblInfo.Text = "No encontraste nada jijo...";
 		}
-		
+		if (Jugador.Cordura <= 20)
+		{
+			SprBrain.Texture = GD.Load<Texture2D>("res://cerebroroto.png"); //=> La imagen es muy pequeña, hay que ajustar sus dimensiones
+		}
 		ActualizarUI(); //=> Actualiza el hambre. La cantidad si es reducida del hambre
 	}
 	

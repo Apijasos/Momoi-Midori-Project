@@ -1,8 +1,43 @@
 using Godot;
 using System;
 
+//MENÚ PRINCIPAL DEL JUEGO
+
 public partial class MainMenu : Control
 {
+	//Path hacía el VBoxContainer de ControladoresPrincipales (se tiene que asignar en el inspector de la derecha)
+	[Export] private NodePath ControladoresPrincipales_path;
+	
+	//Los controladores gráficos, y el VBoxContainer, declarados como variables
+	private VBoxContainer ControladoresPrincipales;
+	private Button BtnJugar, BtnCargarPartida, BtnOpciones, BtnSalir;
+	
+	//Constructor de los anteriores atributos, y reasignación del método .Pressed() de dos de los cuatro botones (por ahora)
+	public override void _Ready()
+	{
+		//Asignación de los paths de los controladores gráficos. El primero a través del inspector y el resto escribiendo su dirección con los nodos
+		ControladoresPrincipales = GetNode<VBoxContainer>(ControladoresPrincipales_path);
+		BtnJugar = GetNode<Button>("ControladoresPrincipales/BtnJugar");
+		BtnCargarPartida = GetNode<Button>("ControladoresPrincipales/BtnCargarPartida");
+		BtnOpciones = GetNode<Button>("ControladoresPrincipales/BtnOpciones");
+		BtnSalir = GetNode<Button>("ControladoresPrincipales/BtnSalir");
+		
+		//Declaro que pasa cuando se presionan BtnJugar y BtnSalir
+		BtnJugar.Pressed += PresionarJugar;
+		BtnSalir.Pressed += PresionarSalir;
+	}
+	
+	//Metodo para abrir la escena principal del juego
+	private void PresionarJugar()
+	{
+		GetTree().ChangeSceneToFile("res://Main.tscn");
+	}
+	
+	//Metodo para salir, si, es una boludez, podes simplemente asignarlo así: 'BtnSalir.Pressed += GetTree().Quit(); pero lo usamos de base para agregar otras cosas, como un cuadro de dialogo de confirmación
+	private void PresionarSalir()
+	{
+		GetTree().Quit();
+	}
 	/*
 	Agregar un menú principal.
 	

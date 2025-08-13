@@ -13,8 +13,8 @@ public partial class Player : Node2D //=> Clase pública declarada, partimos de 
 	[Export] public int RelacionMax {get; set;} = 100;
 	[Export] public int Relacion {get; set;} = 50;
 	[Export] public int CorduraMax {get; set;} = 100;
-	[Export] public int Cordura {get; set;} = 100;
-	
+	[Export] public int Cordura {get; set;} = 21;
+		
 	//Variable para generar un numero aleatorio y usarlo en todo el programa
 	private RandomNumberGenerator rng;
 	//Variable que guarda el indice [i] del vector de los dialogos. Evita dos (o más) repeticiones de dialogo.

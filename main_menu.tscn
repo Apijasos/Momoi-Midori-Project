@@ -1,10 +1,64 @@
-[gd_scene load_steps=2 format=3 uid="uid://bm411v1v7w5p5"]
+[gd_scene load_steps=3 format=3 uid="uid://bm411v1v7w5p5"]
 
 [ext_resource type="Script" uid="uid://chfpfol5141d1" path="res://MainMenu.cs" id="1_06t4h"]
+[ext_resource type="Texture2D" uid="uid://cdsk3tfdjcovp" path="res://NotOfficial_Wallpaper.jpg" id="2_7vrkn"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06t4h")
+ControladoresPrincipales_path = NodePath("ControladoresPrincipales")
+
+[node name="Fondo" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_06t4h")
+texture = ExtResource("2_7vrkn")
+stretch_mode = 6
+
+[node name="ControladoresPrincipales" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -455.0
+offset_top = -258.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="BtnJugar" type="Button" parent="ControladoresPrincipales"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 35
+text = "JUGAR"
+metadata/_edit_lock_ = true
+
+[node name="BtnCargarPartida" type="Button" parent="ControladoresPrincipales"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 35
+text = "CARGAR PARTIDA
+"
+metadata/_edit_lock_ = true
+
+[node name="BtnOpciones" type="Button" parent="ControladoresPrincipales"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 35
+text = "OPCIONES
+"
+metadata/_edit_lock_ = true
+
+[node name="BtnSalir" type="Button" parent="ControladoresPrincipales"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 35
+text = "SALIR"
+metadata/_edit_lock_ = true
