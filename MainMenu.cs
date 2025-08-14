@@ -43,6 +43,7 @@ public partial class MainMenu : Control
 		
 		PnlOpciones.Visible = false;
 		PnlCargarPartida.Visible = false;
+		
 	}
 	
 	//Metodo para abrir la escena principal del juego
