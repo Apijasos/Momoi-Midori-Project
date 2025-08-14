@@ -15,6 +15,7 @@ public partial class MainMenu : Control
 	private Button BtnJugar, BtnCargarPartida, BtnOpciones, BtnSalir, BtnOpcion1, BtnOpcion2, BtnCargar1, BtnCargar2;
 	private Label LblOpcion, LblCargarPartida;
 	private Panel PnlOpciones, PnlCargarPartida;
+	private HSlider VolumeSlider;
 	
 	//Constructor de los anteriores atributos, y reasignación del método .Pressed() de dos de los cuatro botones (por ahora)
 	public override void _Ready()
@@ -34,6 +35,7 @@ public partial class MainMenu : Control
 		BtnOpcion2 = GetNode<Button>("ControladoresOpciones/BtnOpcion2");
 		BtnCargar1 = GetNode<Button>("ControladoresCargarPartida/BtnOpcion1");
 		BtnCargar2 = GetNode<Button>("ControladoresCargarPartida/BtnOpcion2");
+		VolumeSlider = GetNode<HSlider>("ControladoresOpciones/VolumeSlider");
 		
 		//Declaro que pasa cuando se presionan BtnJugar y BtnSalir
 		BtnJugar.Pressed += PresionarJugar;
@@ -43,6 +45,10 @@ public partial class MainMenu : Control
 		
 		PnlOpciones.Visible = false;
 		PnlCargarPartida.Visible = false;
+		
+		var slider = GetNode<HSlider>("PnlOpciones/VolumeSlider");
+		slider.Value = 100; // Inicializa a la derecha (máximo)
+		_on_VolumeSlider_value_changed(100); // Aplica el volumen máximo
 		
 	}
 	
@@ -78,6 +84,14 @@ public partial class MainMenu : Control
 	{
 		PnlOpciones.Visible = false;
 	}
+	
+	private void _on_VolumeSlider_value_changed(float value)
+	{
+		var audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+		float volumeDb = Mathf.Lerp(-80, 0, value / 100f);
+		audioPlayer.VolumeDb = volumeDb;
+	}
+	
 	
 	private void _on_btn_cargar_partida_1_pressed()
 	{
