@@ -99,14 +99,7 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 		{
 			LblInfo.Text = "No encontraste nada jijo...";
 		}
-		if (Jugador.Cordura <= 20)
-		{
-			SprBrain.Texture = GD.Load<Texture2D>("res://cerebroroto.png"); //=> La imagen es muy pequeña, hay que ajustar sus dimensiones
-		}
-		else
-		{
-			SprBrain.Texture = GD.Load<Texture2D>("res://brain.png");
-		}
+		ComprobarCordura(); //=> Llama a la funcion para actualizar la cordura del jugador
 		ActualizarUI(); //=> Actualiza el hambre. La cantidad si es reducida del hambre
 	}
 	
@@ -114,14 +107,7 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 	private void PresionarJugar()
 	{
 		LblInfo.Text = Jugador.Jugar(); //=> .Jugar() devuelve un string, entonces se lo podemos asignar a un .Text
-		if (Jugador.Cordura <= 20)
-		{
-			SprBrain.Texture = GD.Load<Texture2D>("res://cerebroroto.png"); //=> La imagen es muy pequeña, hay que ajustar sus dimensiones
-		}
-		else
-		{
-			SprBrain.Texture = GD.Load<Texture2D>("res://brain.png");
-		}
+		ComprobarCordura(); //=> Llama a la funcion para actualizar la cordura del jugador
 		ActualizarUI(); //=> Actualizamos con el hambre generada por jugar
 	}
 	
@@ -141,6 +127,17 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 		BarradeRelacion.Value = Jugador.Relacion;
 		BarradeCordura.Value = Jugador.Cordura;
 		LblFecha.Text = $"Tenes {Jugador.Choice} decisiones restantes. Han pasado {Jugador.Day} de dias.";
+	}
+	
+	private void ComprobarCordura(){
+		if (Jugador.Cordura <= 20)
+		{
+			SprBrain.Texture = GD.Load<Texture2D>("res://cerebroroto.png"); //=> La imagen es muy pequeña, hay que ajustar sus dimensiones
+		}
+		else
+		{
+			SprBrain.Texture = GD.Load<Texture2D>("res://brain.png");
+		}
 	}
 	
 	//Método que se llama cuando el jugador aprieta click con el mouse en el panel de dialogo (el LblCharla del PanelDialogo)
