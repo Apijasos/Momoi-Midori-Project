@@ -10,7 +10,7 @@ public partial class MainMenu : Control
 	private Button BtnJugar, BtnCargarPartida, BtnOpciones, BtnSalir, BtnCargarPartida1, BtnCargarPartida2;
 	private Panel PnlOpciones, PnlCargarPartida;
 	private Button BtnOpcion1, BtnOpcion2;
-	private Label LblOpciones, LblCargarPartida;
+	private Label LblOpciones, LblCargarPartida, LblVolumen;
 	private HSlider VolumeSlider;
 	private AudioStreamPlayer AudioStreamPlayer;
 	
@@ -35,6 +35,7 @@ public partial class MainMenu : Control
 		BtnCargarPartida2 = PnlCargarPartida.GetNode<Button>("BtnCargarPartida2");
 		LblCargarPartida = PnlCargarPartida.GetNode<Label>("LblCargarPartida");
 
+		LblVolumen = PnlOpciones.GetNode<Label>("LblVolumen");
 		AudioStreamPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 
 		// Conectar eventos de botones
