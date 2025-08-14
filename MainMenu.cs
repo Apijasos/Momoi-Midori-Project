@@ -35,17 +35,14 @@ public partial class MainMenu : Control
 		BtnCargar1 = GetNode<Button>("ControladoresCargarPartida/BtnOpcion1");
 		BtnCargar2 = GetNode<Button>("ControladoresCargarPartida/BtnOpcion2");
 		
-		
-		
-		
-		
-		
 		//Declaro que pasa cuando se presionan BtnJugar y BtnSalir
 		BtnJugar.Pressed += PresionarJugar;
 		BtnSalir.Pressed += PresionarSalir;
 		BtnOpciones.Pressed += PresionarOpciones;
 		BtnCargarPartida.Pressed += PresionarCargarPartida;
 		
+		PnlOpciones.Visible = false;
+		PnlCargarPartida.Visible = false;
 	}
 	
 	//Metodo para abrir la escena principal del juego
@@ -62,12 +59,32 @@ public partial class MainMenu : Control
 	
 	private void PresionarOpciones()
 	{
-		PnlOpciones.Visible = false;
+		PnlOpciones.Visible = true;
 		
 	}
 	
 	private void PresionarCargarPartida()
 	{ 	
+		PnlCargarPartida.Visible = true;
+	}
+	
+	private void _on_btn_opcion_1_pressed()
+	{
+		PnlOpciones.Visible = false;
+	}
+	
+	private void _on_btn_opcion_2_pressed()
+	{
+		PnlOpciones.Visible = false;
+	}
+	
+	private void _on_btn_cargar_partida_1_pressed()
+	{
+		PnlCargarPartida.Visible = false;
+	}
+	
+	private void _on_btn_cargar_partida_2_pressed()
+	{
 		PnlCargarPartida.Visible = false;
 	}
 }
