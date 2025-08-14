@@ -12,9 +12,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_06t4h")
-ControladoresPrincipales_path = NodePath("ControladoresPrincipales")
-PnlOpciones_path = NodePath("PnlOpciones")
-PnlCargarPartida_path = NodePath("PnlCargarPartida")
 
 [node name="Fondo" type="TextureRect" parent="."]
 z_index = -1
