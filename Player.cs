@@ -1,6 +1,7 @@
 //Librerias que permiten manejar el motor (Godot) y el lenguaje (C#).
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Player : Node2D //=> Clase pública declarada, partimos de Player y 'heredamos' la clase Node2D
 {
@@ -24,11 +25,17 @@ public partial class Player : Node2D //=> Clase pública declarada, partimos de 
 	//Variable que guarda el indice [i] del vector de los dialogos. Evita dos (o más) repeticiones de dialogo.
 	private int IndiceDialogoAnterior = -1;
 	
+	private ClsDialogos ManejadorDialogos;
+	private List<ClsDialogo> ListaDialogos;
+	
 	//Inicialización de variables, en este caso solo el de random, ya que afecta otras funciones
 	public override void _Ready()
 	{
 		rng = new RandomNumberGenerator();
 		rng.Randomize();
+		
+		ManejadorDialogos = new ClsDialogos();
+		ListaDialogos = ManejadorDialogos.ObtenerDialogos();
 	}
 	
 	/*Función que trabaja con la lógica de la exploración. Devuelve un bool (si encontró o no comida) 
@@ -71,11 +78,35 @@ public partial class Player : Node2D //=> Clase pública declarada, partimos de 
 		Cordura = Math.Max(0, CorduraGanada + Cordura);
 		return $"Jugaron y se divirtieron jijo. Jugar costó {Costo} de hambre";//=> Devolvemos el string con los datos
 	}
-	
-	//Función que devuelve un string a la hora de hablar con la mina.
 	public string Hablar()
 	{
-		string[] Dialogos = new string[]{ //=> Un vector de una dimensión que almacena dialogos.
+		if (ListaDialogos == null || ListaDialogos.Count == 0)
+		{
+			GD.PrintErr("La lista de dialogos está vacía o devuelve null");
+			return "Error";
+		}
+		int i; //=> Indice para posicionarnos en el vector
+		do //=> Lógica 'do - while' para generar un indice distinto al anterior, y evitar repeticiones seguidas 
+		{
+			i = (int)rng.RandiRange(0, ListaDialogos.Count);//PD .RandiRange(int, int) te devuelve un número aleatorio entre un rango de dos enteros
+		}
+		while(i == IndiceDialogoAnterior && ListaDialogos.Count > 0);//Hacer el Do mientras el indice sea igual al indice anterior, guardado globalmente con anterioridad
+		var DialogoElegido = ListaDialogos[i];
+		
+		int interaccion = (int)rng.RandiRange(5, 10);
+		Relacion = Math.Max(0, Relacion + interaccion);
+		
+		IndiceDialogoAnterior = i; //Cuándo se rompe el bucle se guarda el indice nuevo en está variable, para que la próxima vez no se repita este dialogo
+		ContadorDecisiones(); //=> Se llama la funcion para restar una decision al jugador
+		
+		
+		return DialogoElegido.textodialogo; //Devolvemos el string. Especificamos el indice para no devolver un vector.
+	}
+	//Función que devuelve un string a la hora de hablar con la mina.
+	public string HablarReal()
+	{
+		string[] Dialogos = new string[]//=> Un vector de una dimensión que almacena dialogos.
+		{ 
 			"Holii",
 			"Desearía poder volver a casa...",
 			"¿Cómo estás?",
@@ -108,14 +139,16 @@ public partial class Player : Node2D //=> Clase pública declarada, partimos de 
 		ContadorDecisiones(); //=> Se llama la funcion para restar una decision al jugador
 		return Dialogos[i]; //Devolvemos el string. Especificamos el indice para no devolver un vector.
 		
-		}
+	}
 		
-		// Funcion que le brinda al jugador la cantidad de decisiones que puede ejecutar por dia
-		public void ContadorDecisiones() {
-			Choice--;
-			if(Choice==0){
-				Choice=4;
-				Day++;
-			}
+	// Funcion que le brinda al jugador la cantidad de decisiones que puede ejecutar por dia
+	public void ContadorDecisiones() 
+	{
+		Choice--;
+		if(Choice==0)
+		{
+			Choice=4;
+			Day++;
 		}
+	}
 }
