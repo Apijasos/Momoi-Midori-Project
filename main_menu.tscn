@@ -67,27 +67,28 @@ metadata/_edit_lock_ = true
 [node name="PnlOpciones" type="Panel" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 637.0
-offset_top = 375.0
-offset_right = 1137.0
-offset_bottom = 875.0
+offset_left = 724.0
+offset_top = 283.0
+offset_right = 1224.0
+offset_bottom = 783.0
+metadata/_edit_lock_ = true
 
 [node name="BtnOpcion1" type="Button" parent="PnlOpciones"]
 layout_mode = 0
-offset_left = 50.0
-offset_top = 80.0
-offset_right = 450.0
-offset_bottom = 150.0
+offset_left = 53.0
+offset_top = 143.0
+offset_right = 453.0
+offset_bottom = 213.0
 theme_override_font_sizes/font_size = 30
 text = "Brillo"
 metadata/_edit_lock_ = true
 
 [node name="BtnOpcion2" type="Button" parent="PnlOpciones"]
 layout_mode = 0
-offset_left = 50.0
-offset_top = 170.0
-offset_right = 450.0
-offset_bottom = 240.0
+offset_left = 53.0
+offset_top = 65.0
+offset_right = 453.0
+offset_bottom = 135.0
 theme_override_font_sizes/font_size = 30
 text = "Ventana Completa"
 metadata/_edit_lock_ = true
@@ -121,6 +122,16 @@ theme_override_font_sizes/font_size = 35
 text = "Volumen"
 horizontal_alignment = 1
 metadata/_edit_lock_ = true
+
+[node name="GlowSlider" type="HSlider" parent="PnlOpciones"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 203.0
+offset_right = 456.0
+offset_bottom = 272.0
+metadata/_edit_lock_ = true
+
+[node name="GlowCanvas" type="CanvasModulate" parent="PnlOpciones"]
 
 [node name="PnlCargarPartida" type="Panel" parent="."]
 visible = false
@@ -166,5 +177,6 @@ autoplay = true
 [connection signal="pressed" from="PnlOpciones/BtnOpcion1" to="." method="_on_btn_opcion_1_pressed"]
 [connection signal="pressed" from="PnlOpciones/BtnOpcion2" to="." method="_on_btn_opcion_2_pressed"]
 [connection signal="value_changed" from="PnlOpciones/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="value_changed" from="PnlOpciones/GlowSlider" to="." method="_on_glow_slider_value_changed"]
 [connection signal="pressed" from="PnlCargarPartida/BtnCargarPartida1" to="." method="_on_btn_cargar_partida_1_pressed"]
 [connection signal="pressed" from="PnlCargarPartida/BtnCargarPartida2" to="." method="_on_btn_cargar_partida_2_pressed"]

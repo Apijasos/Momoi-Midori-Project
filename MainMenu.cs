@@ -11,9 +11,9 @@ public partial class MainMenu : Control
 	private Panel PnlOpciones, PnlCargarPartida;
 	private Button BtnOpcion1, BtnOpcion2;
 	private Label LblOpciones, LblCargarPartida, LblVolumen;
-	private HSlider VolumeSlider;
+	private HSlider VolumeSlider, GlowSlider;
 	private AudioStreamPlayer AudioStreamPlayer;
-	
+	private CanvasModulate GlowCanvas;
 	//Constructor de los anteriores atributos, y reasignación del método .Pressed() de dos de los cuatro botones (por ahora)
 	public override void _Ready()
 	{
@@ -29,6 +29,8 @@ public partial class MainMenu : Control
 		BtnOpcion2 = PnlOpciones.GetNode<Button>("BtnOpcion2");
 		LblOpciones = PnlOpciones.GetNode<Label>("LblOpciones");
 		VolumeSlider = PnlOpciones.GetNode<HSlider>("VolumeSlider");
+		GlowSlider = PnlOpciones.GetNode<HSlider>("GlowSlider");
+		GlowCanvas = PnlOpciones.GetNode<CanvasModulate>("GlowCanvas");
 
 		PnlCargarPartida = GetNode<Panel>("PnlCargarPartida");
 		BtnCargarPartida1 = PnlCargarPartida.GetNode<Button>("BtnCargarPartida1");
@@ -48,6 +50,7 @@ public partial class MainMenu : Control
 		BtnCargarPartida1.Pressed += _on_btn_cargar_partida_1_pressed;
 		BtnCargarPartida2.Pressed += _on_btn_cargar_partida_2_pressed;
 		VolumeSlider.ValueChanged += _on_VolumeSlider_value_changed;
+		GlowSlider.ValueChanged += _on_glow_slider_value_changed;
 
 		// Inicialización visual
 		PnlOpciones.Visible = false;
@@ -56,6 +59,8 @@ public partial class MainMenu : Control
 		// Inicialización del slider de volumen y audio
 		VolumeSlider.Value = 100;
 		_on_VolumeSlider_value_changed(VolumeSlider.Value);
+		GlowSlider.Value = 100;
+		_on_glow_slider_value_changed(GlowSlider.Value);
 
 		// Debug
 		GD.Print("Inicialización completa del menú principal.");
@@ -120,5 +125,17 @@ public partial class MainMenu : Control
 	private void _on_btn_cargar_partida_1_pressed() => PnlCargarPartida.Visible = false;
 	
 	private void _on_btn_cargar_partida_2_pressed() => PnlCargarPartida.Visible = false;
+	
+	
+	private void _on_glow_slider_value_changed(double value)
+	{
+		float minDb=0.1f;
+		float maxDb=1f;
+		float GlowSliderValue = (float)value;
+		float Brightness = (float)value;
+		Brightness = Mathf.Lerp(minDb, maxDb, (float)Math.Log10(GlowSliderValue / 100f * 9 + 1));
+		GlowCanvas.Color = new Color (Brightness, Brightness, Brightness, 1.0f);
+		
+	}
 }
 	
