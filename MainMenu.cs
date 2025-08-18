@@ -7,10 +7,10 @@ public partial class MainMenu : Control
 {
 	// No hace falta exportar los NodePath si buscas por nombre fijo
 	private VBoxContainer ControladoresPrincipales;
-	private Button BtnJugar, BtnCargarPartida, BtnOpciones, BtnSalir, BtnCargarPartida1, BtnCargarPartida2;
-	private Panel PnlOpciones, PnlCargarPartida;
-	private Button BtnOpcion1, BtnOpcion2;
-	private Label LblOpciones, LblCargarPartida, LblVolumen;
+	private Button BtnJugar, BtnOpciones, BtnSalir, BtnCargarPartida1, BtnCargarPartida2, 
+	BtnOpcion1, BtnOpcion2, BtnNuevoJuego;
+	private Panel PnlOpciones, PnlJuego;
+	private Label LblOpciones, LblCargarPartida, LblVolumen, LblNuevoJuego, LblBrillo;
 	private HSlider VolumeSlider, GlowSlider;
 	private AudioStreamPlayer AudioStreamPlayer;
 	private CanvasModulate GlowCanvas;
@@ -20,9 +20,15 @@ public partial class MainMenu : Control
 		// Inicialización usando los nombres exactos del árbol
 		ControladoresPrincipales = GetNode<VBoxContainer>("ControladoresPrincipales");
 		BtnJugar = ControladoresPrincipales.GetNode<Button>("BtnJugar");
-		BtnCargarPartida = ControladoresPrincipales.GetNode<Button>("BtnCargarPartida");
 		BtnOpciones = ControladoresPrincipales.GetNode<Button>("BtnOpciones");
 		BtnSalir = ControladoresPrincipales.GetNode<Button>("BtnSalir");
+		
+		PnlJuego = GetNode<Panel>("PnlJuego");
+		BtnNuevoJuego = PnlJuego.GetNode<Button>("BtnNuevoJuego");
+		BtnCargarPartida1 = PnlJuego.GetNode<Button>("BtnCargarPartida1");
+		BtnCargarPartida2 = PnlJuego.GetNode<Button>("BtnCargarPartida2");
+		LblCargarPartida = PnlJuego.GetNode<Label>("LblCargarPartida");
+		LblNuevoJuego = PnlJuego.GetNode<Label>("LblNuevoJuego");
 
 		PnlOpciones = GetNode<Panel>("PnlOpciones");
 		BtnOpcion1 = PnlOpciones.GetNode<Button>("BtnOpcion1");
@@ -31,18 +37,13 @@ public partial class MainMenu : Control
 		VolumeSlider = PnlOpciones.GetNode<HSlider>("VolumeSlider");
 		GlowSlider = PnlOpciones.GetNode<HSlider>("GlowSlider");
 		GlowCanvas = PnlOpciones.GetNode<CanvasModulate>("GlowCanvas");
-
-		PnlCargarPartida = GetNode<Panel>("PnlCargarPartida");
-		BtnCargarPartida1 = PnlCargarPartida.GetNode<Button>("BtnCargarPartida1");
-		BtnCargarPartida2 = PnlCargarPartida.GetNode<Button>("BtnCargarPartida2");
-		LblCargarPartida = PnlCargarPartida.GetNode<Label>("LblCargarPartida");
-
 		LblVolumen = PnlOpciones.GetNode<Label>("LblVolumen");
+		LblBrillo = PnlOpciones.GetNode<Label>("LblBrillo");
 		AudioStreamPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 
 		// Conectar eventos de botones
 		BtnJugar.Pressed += PresionarJugar;
-		BtnCargarPartida.Pressed += PresionarCargarPartida;
+		BtnNuevoJuego.Pressed += PresionarNuevaPartida;
 		BtnOpciones.Pressed += PresionarOpciones;
 		BtnSalir.Pressed += PresionarSalir;
 		BtnOpcion1.Pressed += _on_btn_opcion_1_pressed;
@@ -54,7 +55,7 @@ public partial class MainMenu : Control
 
 		// Inicialización visual
 		PnlOpciones.Visible = false;
-		PnlCargarPartida.Visible = false;
+		PnlJuego.Visible = false;
 
 		// Inicialización del slider de volumen y audio
 		VolumeSlider.Value = 100;
@@ -66,8 +67,22 @@ public partial class MainMenu : Control
 		GD.Print("Inicialización completa del menú principal.");
 	}
 	
+	private void PresionarJugar()
+	{
+		if(PnlJuego.Visible == false)
+		{
+			PnlJuego.Visible = true;
+			PnlOpciones.Visible = false;
+		}
+		else
+		{
+			PnlJuego.Visible = false;
+			PnlOpciones.Visible = false;
+		}
+	}
+	
 	//Metodo para abrir la escena principal del juego
-	private void PresionarJugar() => GetTree().ChangeSceneToFile("res://Main.tscn");
+	private void PresionarNuevaPartida() => GetTree().ChangeSceneToFile("res://Main.tscn");
 	
 	//Metodo para salir, si, es una boludez, podes simplemente asignarlo así: 'BtnSalir.Pressed += GetTree().Quit(); pero lo usamos de base para agregar otras cosas, como un cuadro de dialogo de confirmación
 	private void PresionarSalir() => GetTree().Quit();
@@ -77,26 +92,12 @@ public partial class MainMenu : Control
 		if(PnlOpciones.Visible==false)
 		{
 			PnlOpciones.Visible = true; 
-			PnlCargarPartida.Visible = false;
+			PnlJuego.Visible = false;
 		} 
 		else 
 		{
 			PnlOpciones.Visible = false; 
-			PnlCargarPartida.Visible = false;
-		}
-	}
-	
-	private void PresionarCargarPartida() 
-	{
-		if(PnlCargarPartida.Visible==false) 
-		{
-			PnlCargarPartida.Visible = true; 
-			PnlOpciones.Visible = false;
-		} 
-		else
-		{
-			PnlCargarPartida.Visible = false; 
-			PnlOpciones.Visible = false;
+			PnlJuego.Visible = false;
 		}
 	}
 	
@@ -122,10 +123,9 @@ public partial class MainMenu : Control
 		AudioStreamPlayer.VolumeDb = volumeDb;
 	}
 	
-	private void _on_btn_cargar_partida_1_pressed() => PnlCargarPartida.Visible = false;
+	private void _on_btn_cargar_partida_1_pressed() => PnlJuego.Visible = false;
 	
-	private void _on_btn_cargar_partida_2_pressed() => PnlCargarPartida.Visible = false;
-	
+	private void _on_btn_cargar_partida_2_pressed() => PnlJuego.Visible = false;
 	
 	private void _on_glow_slider_value_changed(double value)
 	{
@@ -138,4 +138,3 @@ public partial class MainMenu : Control
 		
 	}
 }
-	
