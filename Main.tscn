@@ -167,4 +167,12 @@ vertical_alignment = 1
 text_direction = 1
 metadata/_edit_lock_ = true
 
+[node name="FadeRect" type="ColorRect" parent="UI"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
 [node name="HambreTemporizador" type="Timer" parent="."]

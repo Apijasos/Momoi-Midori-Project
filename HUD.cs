@@ -19,11 +19,11 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 	private Button BtnHablar, BtnExplorar, BtnJugar; //=> Los tres botones. Misma lógica que la de los labels
 	private Timer HambreTemporizador;//=> El temporizador
 	private Sprite2D SprBrain;
+	private ColorRect FadeRect;
 	
 	//Inicializamos los controladores especificando su ubicación en el nodo
 	public override void _Ready()
 	{
-		
 		//A cada variable le asignamos su tipo de controlador entre '<>' seguidos de su ubicación. Los nodos principales son su propia variable, como 'Player', 'Control', etc.
 		Jugador = GetNode<Player>(player_path);//=> En el inspector ya declaramos su ubicación.
 		ControlesJuego = GetNode<Panel>(ControlesJuego_path);//=> Lo mismo acá
@@ -46,6 +46,11 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 		BarradeCordura = GetNode<ProgressBar>("ControlesJuego/BarradeCordura");
 		SprBrain = GetNode<Sprite2D>("ControlesJuego/BarradeCordura/SprBrain");
 		LblFecha = GetNode<Label>("ControlesJuego/LblFecha");
+		
+		FadeRect = GetNode<ColorRect>("FadeRect");
+		FadeRect.Visible = true;
+		FadeRect.Modulate = new Color(0, 0, 0, 1); // negro opaco
+		FadeIn();
 		
 		/*Inicializamos la lógica de '¿Qué pasa?' cuando se llama a una función integrada de un controlador gráfico
 		En este caso .Pressed del controlador gráfico de los buttons. Hay que hacerlo para cada uno de los que están
@@ -71,6 +76,13 @@ public partial class HUD : Control //=> Clase pública declarada. Heredamos la c
 		LblFecha.Text = $"Tenes {Jugador.Choice} decisiones restantes. Han pasado {Jugador.Day} de dias.";
 	
 		ActualizarUI(); //=> Función que actualiza los datos del hambre según lo que suceda
+	}
+	
+	private void FadeIn()
+	{
+		var tween = CreateTween();
+		tween.TweenProperty(FadeRect, "modulate:a", 0f, 1f);
+		tween.TweenCallback(Callable.From(() => FadeRect.Visible = false));
 	}
 	
 	//Funcion que se llama cuando se aprieta el botón de hablar
