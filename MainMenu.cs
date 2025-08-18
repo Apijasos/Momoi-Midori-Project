@@ -14,6 +14,7 @@ public partial class MainMenu : Control
 	private HSlider VolumeSlider, GlowSlider;
 	private AudioStreamPlayer AudioStreamPlayer;
 	private CanvasModulate GlowCanvas;
+	private ColorRect FadeRect;
 	//Constructor de los anteriores atributos, y reasignación del método .Pressed() de dos de los cuatro botones (por ahora)
 	public override void _Ready()
 	{
@@ -37,6 +38,7 @@ public partial class MainMenu : Control
 		VolumeSlider = PnlOpciones.GetNode<HSlider>("VolumeSlider");
 		GlowSlider = PnlOpciones.GetNode<HSlider>("GlowSlider");
 		GlowCanvas = PnlOpciones.GetNode<CanvasModulate>("GlowCanvas");
+		FadeRect = GetNode<ColorRect>("FadeRect");
 		LblVolumen = PnlOpciones.GetNode<Label>("LblVolumen");
 		LblBrillo = PnlOpciones.GetNode<Label>("LblBrillo");
 		AudioStreamPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
@@ -56,6 +58,8 @@ public partial class MainMenu : Control
 		// Inicialización visual
 		PnlOpciones.Visible = false;
 		PnlJuego.Visible = false;
+		FadeRect.Visible = false;
+		FadeRect.Modulate = new Color(0, 0, 0, 0); // Transparente al inicio
 
 		// Inicialización del slider de volumen y audio
 		VolumeSlider.Value = 100;
@@ -82,7 +86,20 @@ public partial class MainMenu : Control
 	}
 	
 	//Metodo para abrir la escena principal del juego
-	private void PresionarNuevaPartida() => GetTree().ChangeSceneToFile("res://Main.tscn");
+	private void PresionarNuevaPartida()
+	{
+		FadeRect.Visible = true;
+		// Creamos el tween para fundir a negro
+		var tween = CreateTween();
+		// Animamos el alpha del modulate de FadeRect de su valor actual a 1 (negro opaco), en 1 segundo
+		tween.TweenProperty(FadeRect, "modulate:a", 1f, 1f);
+
+		// Al terminar el tween, cambiamos la escena
+		tween.TweenCallback(Callable.From(() =>
+		{
+			GetTree().ChangeSceneToFile("res://Main.tscn");
+		}));
+	}
 	
 	//Metodo para salir, si, es una boludez, podes simplemente asignarlo así: 'BtnSalir.Pressed += GetTree().Quit(); pero lo usamos de base para agregar otras cosas, como un cuadro de dialogo de confirmación
 	private void PresionarSalir() => GetTree().Quit();
@@ -137,4 +154,6 @@ public partial class MainMenu : Control
 		GlowCanvas.Color = new Color (Brightness, Brightness, Brightness, 1.0f);
 		
 	}
+	
+	
 }
